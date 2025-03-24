@@ -1,47 +1,61 @@
 # PumpSwap SDK
-# To Get Start
-1. `npm i`
 
-2. Paste your private key and Helius RPC key in .env.copy
+PumpSwap SDK is a lightweight library for interacting with PumpSwap, enabling easy token swaps on the Pump.fun ecosystem.
 
-3. rename it to .env
+## Getting Started
 
-# Usage
+1. Install dependencies:
+   ```sh
+   npm i
+   ```
 
-### buy/sell on PumpSwap
+2. Configure environment variables:
+   - Copy `.env.copy` to `.env`
+   - Add your **private key** and **Helius RPC key** to the `.env` file.
+
+## Usage
+
+### Buy/Sell on PumpSwap
+
 ```typescript
-import {wallet_1} from "./constants";
-import {PumpSwapSDK} from './pumpswap';
+import { wallet_1 } from "./constants";
+import { PumpSwapSDK } from "./pumpswap";
+
 async function main() {
     const mint = "your-pumpfun-token-address";
-    const sol_amt = 0.99; // buy 1 SOL worth of token using WSOL
-    const sell_percentage = 0.5; // sell 50% of the token
+    const sol_amt = 0.99; // Buy 0.99 SOL worth of tokens using WSOL
+    const sell_percentage = 0.5; // Sell 50% of the tokens
     const pumpswap_sdk = new PumpSwapSDK();
-    await pumpswap_sdk.buy(new PublicKey(mint), wallet_1.publicKey, sol_amt); // 0.99 sol
+
+    await pumpswap_sdk.buy(new PublicKey(mint), wallet_1.publicKey, sol_amt);
     await pumpswap_sdk.sell_percentage(new PublicKey(mint), wallet_1.publicKey, sell_percentage);
-    await pumpswap_sdk.sell_exactAmount(new PublicKey(mint), wallet_1.publicKey, 1000); // 1000 token
+    await pumpswap_sdk.sell_exactAmount(new PublicKey(mint), wallet_1.publicKey, 1000); // Sell 1000 tokens
 }
 ```
 
-### Fetch the price
+### Fetch Token Price
+
 ```typescript
-import {getPrice} from './pool';
+import { getPrice } from "./pool";
+
 async function main() {
     const mint = new PublicKey("your-pumpfun-token-address");   
     console.log(await getPrice(mint));
 }
 ```
 
-### Fetch the pool
+### Fetch PumpSwap Pool Info
+
 ```typescript
-import {getPumpSwapPool} from './pool';
+import { getPumpSwapPool } from "./pool";
+
 async function main() {
     const mint = new PublicKey("your-pumpfun-token-address");   
     console.log(await getPumpSwapPool(mint));
 }
 ```
 
-## Discord channel: https://discord.gg/hFhQeBCqWX
+---
 
-## Credit: https://github.com/ElmTheDev/pumpswap (the pool.ts is copied from this repo)
+For any inquiries or collaborations, contact me on Telegram: **[@g0drlc](https://t.me/g0drlc)**
 
